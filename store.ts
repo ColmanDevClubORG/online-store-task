@@ -78,26 +78,24 @@ const cart = [1, 3, 5];
 // Functions to implement
 // ------------------------------------
 
-function getAvailableProducts(
-  store /* : add type here */
-) /* : add return types */ {
-  return [];
+function getAvailableProducts(store: Store): Product[] {
+  return store.products.filter((product) => product.inStock === true);
 }
 
 function getProductsInPriceRange(
-  store /* : add type here */,
-  minPrice /* : add type here */,
-  maxPrice /* : add type here */
-) /* : add return types */ {
-  return [];
+  store: Store,
+  minPrice: number,
+  maxPrice: number
+): Product[] {
+  return store.products.filter(
+    (p) => p.price >= minPrice && p.price <= maxPrice
+  );
 }
 
-function getProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+function getProductsByTag(store: Store, tag: string): Product[] {
+  return store.products.filter((t) => t.tags.includes(tag));
 }
+console.log(getProductsByTag(store, "audio"));
 
 function getAvailableProductsByTag(
   store /* : add type here */,
