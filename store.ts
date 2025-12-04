@@ -72,50 +72,52 @@ const store: Store = {
 // Shopping cart: array of product IDs
 // ------------------------------------
 
-const cart = [1, 3, 5];
+const cart: number[] = [1, 3, 5];
 
 // ------------------------------------
 // Functions to implement
 // ------------------------------------
 
 function getAvailableProducts(
-  store /* : add type here */
-) /* : add return types */ {
-  return [];
+  store: Store /* : add type here */
+): Product[] /* : add return types */ {
+
+  return store.products.filter((product) => product.inStock);
 }
 
 function getProductsInPriceRange(
-  store /* : add type here */,
-  minPrice /* : add type here */,
-  maxPrice /* : add type here */
-) /* : add return types */ {
-  return [];
+  store: Store /* : add type here */,
+  minPrice: number /* : add type here */,
+  maxPrice: number /* : add type here */
+): Product[] /* : add return types */ {
+  return store.products.filter((product) => product.price <= maxPrice && product.price >= minPrice)
 }
 
 function getProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+  store: Store /* : add type here */,
+  tag: string /* : add type here */
+): Product[] /* : add return types */ {
+  return store.products.filter((product) => product.tags.includes(tag))
 }
 
 function getAvailableProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+   store: Store /* : add type here */,
+  tag: string /* : add type here */
+): Product[] /* : add return types */ {
+  return store.products.filter((product) => product.inStock && product.tags.includes(tag))
 }
 
 function getCartProducts(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return [];
+  store: Store /* : add type here */,
+  cart: number[] /* : add type here */
+): Product[] /* : add return types */ {
+  return store.products.filter((product) => cart.includes(product.id))
 }
 
 function getCartTotalInStock(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return 0;
+  store: Store /* : add type here */,
+  cart: number[] /* : add type here */
+): number /* : add return types */ {
+  return store.products.filter((product) => cart.includes(product.id) && product.inStock)
+  .reduce((total, product) => total += product.price, 0);
 }
