@@ -78,44 +78,33 @@ const cart = [1, 3, 5];
 // Functions to implement
 // ------------------------------------
 
-function getAvailableProducts(
-  store /* : add type here */
-) /* : add return types */ {
-  return [];
+function getAvailableProducts(store : Store)  : Product[] {
+  return store.products.filter(product => product.inStock);
 }
 
-function getProductsInPriceRange(
-  store /* : add type here */,
-  minPrice /* : add type here */,
-  maxPrice /* : add type here */
-) /* : add return types */ {
-  return [];
+function getProductsInPriceRange( store : Store , minPrice :number, maxPrice :number) : Product[]{
+  return store.products.filter(product => product.price >= minPrice && product.price <= maxPrice) ;
 }
 
-function getProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+function getProductsByTag( store : Store , tag : string[] ) : Product[] {
+  return store.products.filter(product => tag.some(tg => product.tags.includes(tg)));
 }
 
-function getAvailableProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+function getAvailableProductsByTag( store : Store , tag : string[] ) : Product[]{ 
+  return store.products.filter(product => product.inStock && tag.some(tg => product.tags.includes(tg)));
 }
 
-function getCartProducts(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return [];
+function getCartProducts(store : Store , cart : number[] ) : Product[] {
+  return cart.flatMap(productId => store.products.filter(product => product.id === productId));
 }
 
-function getCartTotalInStock(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return 0;
+function getCartTotalInStock( store : Store, cart : number[]) : number {
+  let total = 0;
+  for(const id of cart){
+    const product = store.products.find(product => product.id === id && product.inStock);
+    if(product && product.inStock){
+      total += product.price;
+    }
+  }
+  return total;
 }
