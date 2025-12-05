@@ -78,44 +78,40 @@ const cart = [1, 3, 5];
 // Functions to implement
 // ------------------------------------
 
-function getAvailableProducts(
-  store /* : add type here */
-) /* : add return types */ {
-  return [];
+const getAvailableProducts = () => {
+  const availableProducts: Product[] = store.products.filter(product => product.inStock);
+  return availableProducts;
 }
 
-function getProductsInPriceRange(
-  store /* : add type here */,
-  minPrice /* : add type here */,
-  maxPrice /* : add type here */
-) /* : add return types */ {
-  return [];
+const getProductsInPriceRange = (store: Store, minPrice: number, maxPrice: number): Product[] => {
+  const productsInRange: Product[] = store.products.filter(product => product.price >= minPrice && product.price <= maxPrice);
+  return productsInRange;
 }
 
-function getProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+const getProductsByTag = (store:Store ,tag: string ): Product[] =>{
+  const productsByTag : Product[] = store.products.filter(product => product.tags.includes(tag));
+  return productsByTag;
 }
 
-function getAvailableProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+const getAvailableProductsByTag =( store: Store, tag: string ): Product[] => {
+  const availableProductsByTag: Product[] = store.products.filter(product => product.inStock && product.tags.includes(tag));
+  return availableProductsByTag;
 }
 
-function getCartProducts(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return [];
+const getCartProducts = (store: Store, cart: number[]): Product[] => {
+  const cartProducts: Product[] = store.products.filter(product => cart.includes(product.id));
+  return cartProducts;
 }
 
-function getCartTotalInStock(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return 0;
+function getCartTotalInStock(store: Store , cart: number[]) : number {
+  const cartProducts: Product[] = getCartProducts(store, cart);
+  let total = 0;
+  cartProducts.forEach(product => {
+    if(product.inStock){
+      total += product.price;
+    }
+  });
+  
+  return total;
+
 }
