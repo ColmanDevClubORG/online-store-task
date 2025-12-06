@@ -102,10 +102,12 @@ function getProductsByTag(
 }
 
 function getAvailableProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+  store : Store,
+  tag :string
+) : Product[]  {
+   return store.products.filter((product) => {
+    return product.tags.includes(tag) && product.inStock
+  }) ;
 }
 
 function getCartProducts(
