@@ -78,44 +78,56 @@ const cart = [1, 3, 5];
 // Functions to implement
 // ------------------------------------
 
-function getAvailableProducts(
-  store /* : add type here */
-) /* : add return types */ {
-  return [];
+function getAvailableProducts(store: Store): Product[] {
+  return store.products.filter((product) => { return product.inStock })
 }
 
 function getProductsInPriceRange(
-  store /* : add type here */,
-  minPrice /* : add type here */,
-  maxPrice /* : add type here */
-) /* : add return types */ {
-  return [];
+  store: Store,
+  minPrice: number,
+  maxPrice: number
+): Product[] {
+  return store.products.filter((product) => {
+    return product.price >= minPrice && product.price <= maxPrice
+  });
 }
 
 function getProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+  store:Store,
+  tag:string
+) : Product[]  {
+    return store.products.filter((product) => {
+    return product.tags.includes(tag)
+  }) ;
 }
 
 function getAvailableProductsByTag(
-  store /* : add type here */,
-  tag /* : add type here */
-) /* : add return types */ {
-  return [];
+  store : Store,
+  tag :string
+) : Product[]  {
+   return store.products.filter((product) => {
+    return product.tags.includes(tag) && product.inStock
+  }) ;
 }
 
 function getCartProducts(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return [];
+  store:Store,
+  cart :number[]
+) : Product[]  {
+    return store.products.filter((product) => {
+    return cart.includes(product.id)
+    });
 }
 
 function getCartTotalInStock(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return 0;
+  store :Store,
+  cart :number[],
+) :number {
+  let total = 0
+      store.products.forEach((product) => {
+        if (product.inStock && cart.includes(product.id)){
+          total+=product.price
+    }
+    });
+    return total
 }
