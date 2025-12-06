@@ -120,8 +120,14 @@ function getCartProducts(
 }
 
 function getCartTotalInStock(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return 0;
+  store :Store,
+  cart :number[],
+) :number {
+  let total = 0
+      store.products.forEach((product) => {
+        if (product.inStock && cart.includes(product.id)){
+          total+=product.price
+    }
+    });
+    return total
 }
