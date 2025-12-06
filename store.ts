@@ -111,10 +111,12 @@ function getAvailableProductsByTag(
 }
 
 function getCartProducts(
-  store /* : add type here */,
-  cart /* : add type here */
-) /* : add return types */ {
-  return [];
+  store:Store,
+  cart :number[]
+) : Product[]  {
+    return store.products.filter((product) => {
+    return cart.includes(product.id)
+    });
 }
 
 function getCartTotalInStock(
