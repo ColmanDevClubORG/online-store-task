@@ -78,10 +78,8 @@ const cart = [1, 3, 5];
 // Functions to implement
 // ------------------------------------
 
-function getAvailableProducts(
-  store /* : add type here */
-) /* : add return types */ {
-  return [];
+function getAvailableProducts(store: Store): Product[] {
+  return store.products.filter((product) => { return product.inStock })
 }
 
 function getProductsInPriceRange(
