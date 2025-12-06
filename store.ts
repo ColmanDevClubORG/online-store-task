@@ -83,11 +83,13 @@ function getAvailableProducts(store: Store): Product[] {
 }
 
 function getProductsInPriceRange(
-  store /* : add type here */,
-  minPrice /* : add type here */,
-  maxPrice /* : add type here */
-) /* : add return types */ {
-  return [];
+  store: Store,
+  minPrice: number,
+  maxPrice: number
+): Product[] {
+  return store.products.filter((product) => {
+    return product.price >= minPrice && product.price <= maxPrice
+  });
 }
 
 function getProductsByTag(
